@@ -1,0 +1,6 @@
+INDEX VERSION 1.131+C:\Users\Mateo\Desktop\Ciclo II\Algoritmia y estructura de datos\Semana 6\AED_Semana_06_Lab\.metadata\.plugins\org.eclipse.jdt.core
+1552322027.index
+3314539601.index
+2210424516.index
+3071866523.index
+14526675.index
