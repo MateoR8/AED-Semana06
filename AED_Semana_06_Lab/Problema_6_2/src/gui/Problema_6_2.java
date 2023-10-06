@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
+import semana_06.ArregloNotas;
 
 import javax.swing.JFrame;
 
@@ -102,7 +103,7 @@ public class Problema_6_2 extends JFrame implements ActionListener {
 		txtS.setFont(new Font("Monospaced", Font.PLAIN, 13));
 		scrollPane.setViewportView(txtS);
 	}
-
+	
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnRemplazarUltimaNotaDesaprobatoria) {
 			actionPerformedBtnRemplazarUltimaNotaDesaprobatoria(arg0);
@@ -121,23 +122,56 @@ public class Problema_6_2 extends JFrame implements ActionListener {
 		}
 		limpieza();
 	}
+	
+	ArregloNotas an = new ArregloNotas();
 
 	protected void actionPerformedBtnAdicionar(ActionEvent arg0) {
+		try {
+			an.adicionar(leerNota());
+			listar();
+		}
+		catch (Exception e) {
+			mensaje("error de ingreso");
+		}
 
 	}
 	protected void actionPerformedBtnEliminarAlFinal(ActionEvent arg0) {
-	
+		if (an.tamanio() > 0) {
+			an.eliminarFinal();
+			listar();
+		}
+		else
+			mensaje("el Arreglo est  vac o");
+		
 	}
 	protected void actionPerformedBtnEliminarTodo(ActionEvent arg0) {
+		if (an.tamanio() > 0) {
+			an.eliminarTodo();
+			listar();
+		}
+		else
+			mensaje("el Arreglo est  vac o");
 		
 	}
 	protected void actionPerformedBtnDecrementarUltimaNotaDesaprobatoria(ActionEvent arg0) {
+		if (an.tamanio() > 0) {
+			an.decrementarUltimaNotaDesaprobatoria();
+			listar();
+		}
+		else
+			mensaje("el Arreglo est  vac o");
 	
 	}
 	protected void actionPerformedBtnRemplazarUltimaNotaDesaprobatoria(ActionEvent arg0) {
+		if (an.tamanio() > 0) {
+			an.remplazarUltimaNotaDesaprobatoria();
+			listar();
+		}
+		else
+			mensaje("el Arreglo est  vac o");
 	
 	}
-	//  Métodos tipo void (sin parámetros)
+	//  M todos tipo void (sin par metros)
 	void imprimir() {
 		imprimir("");
 	}
@@ -146,16 +180,20 @@ public class Problema_6_2 extends JFrame implements ActionListener {
 		txtNota.requestFocus();
 	}
 	void listar() {
+		txtS.setText("");
+		for (int i=0; i<an.tamanio(); i++){
+			imprimir("n[" + i + "] : " + an.obtener(i));
+		}
 
 	}
-	//  Métodos tipo void (con parámetros)
+	//  M todos tipo void (con par metros)
 	void imprimir(String s) {
 		txtS.append(s + "\n");
 	}
 	void mensaje(String s) {
 		JOptionPane.showMessageDialog(this, s);
 	}
-	//  Métodos que retornan valor (sin parámetros)
+	//  M todos que retornan valor (sin par metros)
 	int leerNota()  {
 		return Integer.parseInt(txtNota.getText().trim());
 	}
