@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
+import semana_06.ArregloTemperaturas;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -120,23 +121,60 @@ public class Propuesto_6_1 extends JFrame implements ActionListener {
 		}
 		limpieza();
 	}
+	
+	ArregloTemperaturas at = new ArregloTemperaturas();
 
 	protected void actionPerformedBtnAdicionar(ActionEvent arg0) {
+		try {
+			at.adicionar(leerTemperatura());
+			listar();
+		}
+		catch (Exception e) {
+			mensaje("error de ingreso");
+		}
 
 	}
 	protected void actionPerformedBtnEliminarAlFinal(ActionEvent arg0) {
-
+		
+		if(at.tamanio() > 0) {
+			at.eliminarAlFinal();
+			listar();
+		} else {
+			mensaje("El arreglo esta vacio");
+		}
+		
 	}
 	protected void actionPerformedBtnEliminarTodo(ActionEvent arg0) {
+		if(at.tamanio() > 0) {
+			at.eliminarTodo();
+			listar();
+		} else {
+			mensaje("El arreglo esta vacio");
+		}
+		
 
 	}
 	protected void actionPerformedBtnRemplazarPrimeraTemperaturaNormal(ActionEvent arg0) {
+		if(at.tamanio() > 0) {
+			at.remplazarPrimeraTemperaturaNormal();
+			listar();
+		} else {
+			mensaje("El arreglo esta vacio");
+		}
+		
 
 	}
 	protected void actionPerformedBtnIncrementarTemperaturas(ActionEvent arg0) {
+		if(at.tamanio() > 0) {
+			at.incrementarTemperaturas();
+			listar();
+		} else {
+			mensaje("El arreglo esta vacio");
+		}
+		
 	
 	}
-	//  Métodos tipo void (sin parámetros)
+	//  M todos tipo void (sin par metros)
 	void imprimir() {
 		imprimir("");
 	}
@@ -145,16 +183,20 @@ public class Propuesto_6_1 extends JFrame implements ActionListener {
 		txtTemperatura.requestFocus();
 	}
 	void listar() {
+		txtS.setText("");
+		for(int i = 0; i < at.tamanio(); i++) {
+			imprimir("n[" + i + "] : " + at.obtener(i));
+		}
 
 	}
-	//  Métodos tipo void (con parámetros)
+	//  M todos tipo void (con par metros)
 	void imprimir(String s) {
 		txtS.append(s + "\n");
 	}
 	void mensaje(String s) {
 		JOptionPane.showMessageDialog(this, s);
 	}
-	//  Métodos que retornan valor (sin parámetros)
+	//  M todos que retornan valor (sin par metros)
 	double leerTemperatura()  {
 		return Double.parseDouble(txtTemperatura.getText().trim());
 	}
